@@ -7,6 +7,7 @@ import {
   increaseQueryCount,
   increaseVanillaCount,
 } from "../api/requestCounter";
+import Guide from "../components/Guide";
 
 export default function CacheExperiment() {
   const [posts, setPosts] = useState([]);
@@ -152,6 +153,14 @@ export default function CacheExperiment() {
             </div>
           </div>
         </section>
+        <Guide title={`Cache Experiment Guied`}>
+          <ol className="space-y-2">
+            <li>Cache 페이지에서 초기값을 확인합니다.</li>
+            <li>Dashboard로 이동합니다.</li>
+            <li>다시 Cache 페이지로 이동합니다.</li>
+            <li>Network Request Count와 Cache 상태를 확인합니다.</li>
+          </ol>
+        </Guide>
       </main>
     </>
   );
