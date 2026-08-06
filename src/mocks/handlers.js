@@ -12,8 +12,23 @@ let posts = [
 ];
 
 export const handlers = [
-  // post 조회
+  // GET
   http.get("/posts", () => {
     return HttpResponse.json(posts);
+  }),
+  // POST
+  http.post("/posts", async ({ request }) => {
+    const body = await request.json();
+
+    const newPost = {
+      id: posts.length + 1,
+      title: body.title,
+    };
+
+    posts.push(newPost);
+
+    console.log(`Posts: ${posts}`);
+
+    return HttpResponse.json(newPost);
   }),
 ];
