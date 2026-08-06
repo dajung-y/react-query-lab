@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { getPosts } from "../api/posts";
 import { useEffect, useState } from "react";
 import Guide from "../components/Guide";
+import Layout from "../components/Layout";
+import ExperimentHeader from "../components/ExperimentHeader";
 
 export default function StaleTimeExperiment() {
   const zeroQueryKey = ["posts", "stale-0"];
@@ -72,15 +74,12 @@ export default function StaleTimeExperiment() {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-screen max-w-6xl px-6 py-8">
-        <section className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
-            staleTime Experiment
-          </h1>
-          <p className="mt-2 text-sm text-gray-600">
-            Fresh Stale 상태 변화 확인
-          </p>
-        </section>
+      <Layout>
+        <ExperimentHeader
+          title={`staleTime Experiment`}
+          description={`Fresh Stale 상태 변화 확인`}
+        />
+
         {/* report */}
         <section className="grid grid-cols-2 gap-2 text-gray-900 font-mono">
           {/* staleTime: 0 */}
@@ -185,7 +184,7 @@ export default function StaleTimeExperiment() {
             </li>
           </ol>
         </Guide>
-      </main>
+      </Layout>
     </>
   );
 }

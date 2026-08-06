@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createPost, getPosts } from "../api/posts";
 import Guide from "../components/Guide";
+import Layout from "../components/Layout";
+import ExperimentHeader from "../components/ExperimentHeader";
 
 export default function MutationExperiment() {
   const queryClient = useQueryClient();
@@ -103,15 +105,11 @@ export default function MutationExperiment() {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-screen max-w-6xl px-6 py-8">
-        <section className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Mutation Experiment
-          </h1>
-          <p className="mt-2 text-sm text-gray-600">
-            React Query Mutation 동작 확인
-          </p>
-        </section>
+      <Layout>
+        <ExperimentHeader
+          title={`Mutation Experiment`}
+          description={`React Query Mutation 동작 확인`}
+        />
         {/* report */}
         <section className="space-y-4">
           {/* add post */}
@@ -213,7 +211,7 @@ export default function MutationExperiment() {
             </li>
           </ul>
         </Guide>
-      </main>
+      </Layout>
     </>
   );
 }

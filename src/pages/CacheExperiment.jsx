@@ -8,6 +8,8 @@ import {
   increaseVanillaCount,
 } from "../api/requestCounter";
 import Guide from "../components/Guide";
+import Layout from "../components/Layout";
+import ExperimentHeader from "../components/ExperimentHeader";
 
 export default function CacheExperiment() {
   const [posts, setPosts] = useState([]);
@@ -56,14 +58,11 @@ export default function CacheExperiment() {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-screen max-w-6xl px-6 py-8">
-        {/* description */}
-        <section className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Cache Experiment</h1>
-          <p className="mt-2 text-sm text-gray-600">
-            React Query Cache 동작 비교
-          </p>
-        </section>
+      <Layout>
+        <ExperimentHeader
+          title={`Cache Experiment`}
+          description={`React Query Cache 동작 비교`}
+        />
         {/* report */}
         <section className="grid grid-cols-2 gap-2 text-gray-900 font-mono">
           {/* Vanilla */}
@@ -161,7 +160,7 @@ export default function CacheExperiment() {
             <li>Network Request Count와 Cache 상태를 확인합니다.</li>
           </ol>
         </Guide>
-      </main>
+      </Layout>
     </>
   );
 }
