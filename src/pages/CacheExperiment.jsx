@@ -22,6 +22,7 @@ export default function CacheExperiment() {
   const queryClient = useQueryClient();
   const cache = queryClient.getQueryData(["posts"]);
   const postsQueryKey = ["posts"];
+
   // Vailla
   async function fetchPosts() {
     setLoading(true);
@@ -64,19 +65,15 @@ export default function CacheExperiment() {
           description={`React Query Cache 동작 비교`}
         />
         {/* report */}
-        <section className="grid grid-cols-2 gap-2 text-gray-900 font-mono">
-          {/* Vanilla */}
-          <div className="px-6 py-4 bg-gray-200">
-            <h2 className="mb-4 text-xl font-mono">Vanilla</h2>
+        <section className="grid grid-cols-2 gap-4 text-gray-900 font-mono">
+          {/* useEffext */}
+          <div className="px-6 py-4 rounded-lg bg-indigo-50">
+            <h2 className="mb-4 text-xl font-semibold">useEffect</h2>
             {/* api 정보 */}
-            <div className="space-y-2 text-lg">
+            <div className="space-y-4">
               <div className="flex justify-between">
                 <span>Network Request Count</span>
                 <span>{requsetCount.vanillaCount}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Status</span>
-                <span>{loading ? "Loading..." : "Success"}</span>
               </div>
               <div className="flex justify-between">
                 <span>Cache</span>
@@ -89,7 +86,7 @@ export default function CacheExperiment() {
               {posts.map((post) => (
                 <div
                   key={post.id}
-                  className="px-4 py-2 rounded-lg bg-indigo-200">
+                  className="px-4 py-2 rounded-lg bg-indigo-200 shadow">
                   {post.title}
                 </div>
               ))}
@@ -105,17 +102,13 @@ export default function CacheExperiment() {
           </div>
 
           {/* React Query */}
-          <div className="px-6 py-4 bg-gray-50">
-            <h2 className="mb-4 text-xl font-mono">React Query</h2>
+          <div className="px-6 py-4 rounded-lg bg-indigo-100">
+            <h2 className="mb-4 text-xl font-semibold">React Query</h2>
             {/* api 정보*/}
-            <div className="space-y-2 text-lg">
+            <div className="space-y-4">
               <div className="flex justify-between">
                 <span>Network Request Count</span>
                 <span>{requsetCount.queryCount}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Status</span>
-                <span>{queryLoading ? "Loading..." : "Success"}</span>
               </div>
               <div className="flex justify-between">
                 <span>Cache</span>
@@ -123,18 +116,18 @@ export default function CacheExperiment() {
                   {cache ? "HIT" : "MISS"}
                 </span>
               </div>
-            </div>
-            {/* posts */}
-            <div className="mt-6 space-y-2">
-              <h3 className="text-lg font-semibold mb-2">Posts</h3>
               <div className="flex justify-between">
                 <span>Query key</span>
                 <span>{JSON.stringify(postsQueryKey)}</span>
               </div>
+            </div>
+            {/* posts */}
+            <div className="mt-6 space-y-2">
+              <h3 className="text-lg font-semibold mb-2">Posts</h3>
               {queryPosts?.map((post) => (
                 <div
                   key={post.id}
-                  className="px-4 py-2 rounded-lg bg-indigo-200">
+                  className="px-4 py-2 rounded-lg bg-white shadow">
                   {post.title}
                 </div>
               ))}
@@ -152,7 +145,7 @@ export default function CacheExperiment() {
             </div>
           </div>
         </section>
-        <Guide title={`Cache Experiment Guied`}>
+        <Guide title={`Cache Experiment Guide`}>
           <ol className="space-y-2">
             <li>Cache 페이지에서 초기값을 확인합니다.</li>
             <li>Dashboard로 이동합니다.</li>

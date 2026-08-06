@@ -81,9 +81,9 @@ export default function StaleTimeExperiment() {
         />
 
         {/* report */}
-        <section className="grid grid-cols-2 gap-2 text-gray-900 font-mono">
+        <section className="grid grid-cols-2 gap-4 text-gray-900 font-mono">
           {/* staleTime: 0 */}
-          <div className="px-6 py-4 bg-indigo-50">
+          <div className="px-6 py-4 rounded-lg bg-indigo-50">
             <h2 className="mb-4 text-xl font-semibold">staleTime: 0ms</h2>
             <div className="space-y-4">
               <div className="flex justify-between">
@@ -106,18 +106,18 @@ export default function StaleTimeExperiment() {
                 <span>Updated At</span>
                 <span>{formatDate(zeroUpdatedAt)}</span>
               </div>
-              <div className="space-y-2">
+              <div className="mt-6 space-y-2">
                 <h3 className="text-lg font-semibold mb-2">Posts</h3>
                 {staleTimeZero?.map((post) => (
                   <div
                     key={post.id}
-                    className="px-4 py-2 rounded-lg bg-indigo-200">
+                    className="px-4 py-2 rounded-lg bg-indigo-200 shadow">
                     {post.title}
                   </div>
                 ))}
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">특징</h3>
+                <h3 className="text-lg font-semibold mt-6 mb-2">특징</h3>
                 <ul className="text-sm space-y-2">
                   <li>데이터를 받은 직후 부터 stale 상태로 간주합니다.</li>
                   <li></li>
@@ -126,7 +126,7 @@ export default function StaleTimeExperiment() {
             </div>
           </div>
           {/* staleTime: 5 */}
-          <div className="px-6 py-4 bg-indigo-100">
+          <div className="px-6 py-4 rounded-lg bg-indigo-100">
             <h2 className="mb-4 text-xl font-semibold">staleTime: 5</h2>
             <div className="space-y-4">
               <div className="flex justify-between">
@@ -149,10 +149,12 @@ export default function StaleTimeExperiment() {
                 <span>Updated At</span>
                 <span>{formatDate(fiveUpdatedAt)}</span>
               </div>
-              <div className="space-y-2">
+              <div className="mt-6 space-y-2">
                 <h3 className="text-lg font-semibold mb-2">Posts</h3>
                 {staleTimeFive?.map((post) => (
-                  <div key={post.id} className="px-4 py-2 rounded-lg bg-white">
+                  <div
+                    key={post.id}
+                    className="px-4 py-2 rounded-lg bg-white shadow">
                     {post.title}
                   </div>
                 ))}
@@ -169,7 +171,7 @@ export default function StaleTimeExperiment() {
               이동합니다.
             </li>
             <li>
-              다시 staleTime 페이지로 돌아와 두 개의 Updated At 을 비교합니다.
+              다시 staleTime 페이지로 돌아와 두 개의 Updated At을 비교합니다.
             </li>
           </ol>
         </Guide>
