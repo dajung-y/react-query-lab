@@ -1,78 +1,94 @@
-# React Query Cache Experiment
+# React Query Mutation Experiment
 
-## Cache
+## Mutation
 
-### 1. Cache란
+### 1. Mutation이란
 
-Cache는 한 번 가져온 데이터를 저장해두고 같은 데이터가 필요할 때 다시 사용할 수 있도록 하는 방식이다.
+Mutation은 **서버의 데이터를 변경하는 작업을 처리**할 때 사용하는 기능이다.
 
-저장된 데이터를 재사용하면 불필요한 네트워크 요청을 줄이고 더 빠르게 필요한 데이터를 보여줄 수 있다.
+데이터 조회에 사용되는 `useQuery`와 다르게 `useMatation`은 게시글 추가, 수정, 삭제와 같은 데이터 변경 작업에 사용한다.
 
 ---
 
-### 2. React Query에서의 Cache
+### 2. React Query에서의 Mutation
 
-React Query는 `useQuery`로 가져온 데이터를 Query Key를 기준으로 Cache에 저장하고 관리한다.
+React Query에서는 `useMutation`을 사용해 데이터 변경 요청을 관리할 수 있다.
 
-처음 데이터를 요청하면 API 응답이 Cache에 저장되고 이후에 같은 Query Key를 사용하는 Query에서는 저장된 데이터를 재사용하게 된다.
+```
+const mutation = useMutation({
+  mutationFn: createPost,
+});
+```
 
-이번 실험에서는 `["posts"]`를 Query Key로 사용해 Cache 동작을 확인했다.
+`mutation.mutate()`를 호출하면 `mutationFn`에 전달한 함수를 실행하고 요청의 상태와 결과를 React Query에서 관리한다.
+
+이번 실험에서는 게시글 추가 기능을 만들어 `useMutation`의 동작과 상태 변화를 확인했다.
 
 ---
 
 ### 3. 실험
 
-React Query의 Cache가 실제로 네트워크 요청을 줄이는지 확인하기 위해 두 가지 방식을 비교해 진행했다.
+게시글 제목을 입력하고 `추가하기`버튼을 누르면 `mutation.mutate()`를 실행하도록 구현했다.
 
-**useEffect**
+```
+mutation.mutate({
+  title,
+});
+```
 
-`useEffect`에서 `getPosts()`를 직접 호출했다.
+게시글이 추가되면 NSW에서 관리하고 있는 `posts`데이터에 새로운 게시글이 추가되도록 했다.
 
-페이지를 이동했다가 다시 돌아오면 컴포넌트가 다시 마운트되면서 API 요청이 다시 발생한다.
+Mutation의 상태를 화면에 표시해서 요청 과정에서 상태가 어떻게 변하는지 확인했다.
 
-**React Query**
+idle
 
-`useQuery`를 사용하고 `["posts"]`를 Query Key로 지정했다.
+-> pending
 
-Cache에 데이터가 존재하는지 확인하기 위해 `queryClient.getQueryData()`를 사용하고 화면에 `HIT/MISS`로 표시했다.
+-> success/error
 
-두 방식의 실제 API 요청 횟수를 확인하기 위해 Network Request Count를 상단에 표시했다.
+화면에서는 다음 값들을 확인할 수 있도록 했다.
+
+- Status
+- isPending
+- isSuccess
+- isError
+- Reponse
+- Posts
 
 ---
 
 ### 4. 실험 결과
 
-| 방식        | 첫 페이지 진입 | 페이지 재방문 |
-| ----------- | -------------- | ------------- |
-| useEffect   | API 요청       | API 요청      |
-| React Query | API 요청       | Cache 사용    |
+게시글 제목을 입력하고 추가하면 Mutation 상태가 변경되는 것을 확인했다.
 
-Network 탭과 화면의 Network Request Count를 함께 확인하면서 React Query가 Cache를 사용하는 것을 확인했다.
+게시글 입력
 
-React Query
+-> 추가하기
 
-첫 진입
+-> pending
 
--> API 요청
+-> 서버 요청
 
--> 응답 데이터를 Cache에 저장
+-> success
 
-페이지 이동
+-> Response 확인
 
--> Cache 페이지 재방문
+-> Posts 목록 업데이트
 
--> 기존 Cache 데이터 확인
+성공한 경우 서버에서 반환된 게시글 데이터를 Response에서 확인할 수 있도록 했다.
 
--> 데이터 재사용
+Mutaion이 성공한 후에는 `invalidateQueries`를 사용해 기존 `posts` Query를 갱신하도록 했다.
+
+이를 통해 새로운 게시글이 Posts 목록에 반영되는 것을 확인했다.
 
 ---
 
 ### 5. 알게 된 내용
 
-- React Query는 **Query Key**를 기준으로 데이터를 Cache에 저장하고 관리한다.
-- Cache에 데이터가 존재하면 기존 데이터를 재사용한다.
-- `Cache HIT`는 해당 Query Key의 데이터가 Cache에 존재함을 의미한다.
-- Cache가 존재하는 것과 데이터가 최신인지의 여부는 다른 개념이다.
-- `staleTime`에 따라 Cache 데이터의 Fresh/Stale 상태가 달라질 수 있다.
+- `useMutaion`은 서버 데이터의 **변경 작업**을 관리할 때 사용한다.
+- `mutation.mutate()`를 호출하면 등록한 `mutationFn`이 실행된다.
+- Mutation은 `idle`, `pending`, `success`, `error` 등 의 상태를 제공한다.
+- `mutation.data`를 통해 성공한 요청의 Response 데이터를 확인할 수 있다.
+- Mutation이 성공한 후 `invalidateQueries`를 사용하면 관련 Query를 다시 가져와 변경된 데이터를 반영할 수 있다.
 
-이번 실험에서는 Cache의 기본 동작을 확인했다. 다음 실험에서는 `staleTime`을 변경하면서 Fresh/Stale 상태와 재요청 시점을 확인하겠다.
+이번 실험을 통해 데이터 조회는 `useQuery` 데이터 변경은 `useMutation`으로 관리하는 것을 확인했다.
