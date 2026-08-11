@@ -113,7 +113,7 @@ export default function MutationExperiment() {
         {/* report */}
         <section className="space-y-4">
           {/* add post */}
-          <div className="px-6 pt-4 pb-8 rounded-lg bg-indigo-50">
+          <div className="px-8 pt-6 pb-8 rounded-lg bg-indigo-50">
             <h2 className="mb-4 text-xl font-semibold font-mono">Add post</h2>
             <div className="">
               <h3 className="mb-2 text-lg font-semibold font-mono">Title</h3>
@@ -134,7 +134,7 @@ export default function MutationExperiment() {
             </div>
           </div>
           {/* mutation status */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-100">
+          <div className="px-8 py-6 rounded-lg bg-indigo-100">
             <h2 className="mb-4 text-xl font-semibold font-mono">
               Mutation Status
             </h2>
@@ -167,7 +167,7 @@ export default function MutationExperiment() {
             </div>
           </div>
           {/* posts */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-50">
+          <div className="px-8 py-6 rounded-lg bg-indigo-50">
             <h2 className="mb-4 text-xl font-semibold font-mono">Posts</h2>
             <div className="mb-4 space-y-2">
               {posts?.map((post) => (

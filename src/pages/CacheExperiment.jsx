@@ -67,7 +67,7 @@ export default function CacheExperiment() {
         {/* report */}
         <section className="grid grid-cols-2 gap-4 text-gray-900 font-mono">
           {/* useEffext */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-50">
+          <div className="px-8 py-6 rounded-lg bg-indigo-50">
             <h2 className="mb-4 text-xl font-semibold">useEffect</h2>
             {/* api 정보 */}
             <div className="space-y-4">
@@ -94,7 +94,7 @@ export default function CacheExperiment() {
             {/* description */}
             <div className="mt-6">
               <h3 className="text-lg font-semibold mb-2">특징</h3>
-              <ul className="text-sm space-y-2">
+              <ul className="text-sm space-y-2 leading-6">
                 <li>컴포넌트가 마운트 될 때마다 API를 요청합니다.</li>
                 <li>별도의 캐시를 사용하지 않습니다.</li>
               </ul>
@@ -102,7 +102,7 @@ export default function CacheExperiment() {
           </div>
 
           {/* React Query */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-100">
+          <div className="px-8 py-6 rounded-lg bg-indigo-100">
             <h2 className="mb-4 text-xl font-semibold">React Query</h2>
             {/* api 정보*/}
             <div className="space-y-4">
@@ -135,7 +135,7 @@ export default function CacheExperiment() {
             {/* description */}
             <div className="mt-6">
               <h3 className="text-lg font-semibold mb-2">특징</h3>
-              <ul className="text-sm space-y-2">
+              <ul className="text-sm space-y-2 leading-6">
                 <li>Query Key를 기준으로 데이터를 캐싱합니다.</li>
                 <li>
                   Cache 데이터가 존재하면 재사용하여 불필요한 요청을 줄입니다.

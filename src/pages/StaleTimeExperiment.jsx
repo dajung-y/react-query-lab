@@ -83,7 +83,7 @@ export default function StaleTimeExperiment() {
         {/* report */}
         <section className="grid grid-cols-2 gap-4 text-gray-900 font-mono">
           {/* staleTime: 0 */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-50">
+          <div className="px-8 py-6 rounded-lg bg-indigo-50">
             <h2 className="mb-4 text-xl font-semibold">staleTime: 0ms</h2>
             <div className="space-y-4">
               <div className="flex justify-between">
@@ -126,7 +126,7 @@ export default function StaleTimeExperiment() {
             </div>
           </div>
           {/* staleTime: 5 */}
-          <div className="px-6 py-4 rounded-lg bg-indigo-100">
+          <div className="px-8 py-6 rounded-lg bg-indigo-100">
             <h2 className="mb-4 text-xl font-semibold">staleTime: 5</h2>
             <div className="space-y-4">
               <div className="flex justify-between">
