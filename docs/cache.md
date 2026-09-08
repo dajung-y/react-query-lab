@@ -49,20 +49,25 @@ Cache에 데이터가 존재하는지 확인하기위해 `queryClient.getQueryDa
 
 ### 4. 실험 결과
 
-## | 방식 | 첫 페이지 진입 | 페이지 재방문 |
-
-| useEffect | API 요청 | API 요청 |
-| React Query | API 요청 | Cache 재사용 |
+| 방식        | 첫 페이지 진입 | 페이지 재방문 |
+| ----------- | -------------- | ------------- |
+| useEffect   | API 요청       | API 요청      |
+| React Query | API 요청       | Cache 재사용  |
 
 실제 Network 탭과 화면의 Request Count를 확인하면서 React Query가 Cache를 사용하는 것을 확인했다.
 
 **첫 진입**
+
 -> API 요청
+
 -> 응답 데이터 Cache 저장
 
 **페이지 이동**
+
 -> Cache 페이지 재방문
+
 -> 기존 Cache 데이터 확인
+
 -> 데이터 재사용
 
 ---
